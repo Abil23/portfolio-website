@@ -65,8 +65,8 @@ const ProjectsSection = () => {
       description: 'Portofolio responsif yang menampilkan prinsip-prinsip desain modern dan interaksi yang lancar.',
       image: 'https://i.ibb.co.com/G4McHWvt/Irsyad-02-14-2026-01-35-PM.png',
       techStack: ['HTML5', 'CSS3', 'TailwindCSS', 'JavaScript', 'React'],
-      liveDemo: '#',
-      sourceCode: '#',
+      liveDemo: 'https://www.itsabil.my.id/',
+      sourceCode: 'https://github.com/Abil23/portfolio-website',
     },
   ];
 
