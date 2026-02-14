@@ -16,7 +16,7 @@ const EducationSection = () => {
       icon: Award,
       title: 'Achievements',
       items: [
-        { label: 'OSN', value: '4th rank at the district/city level in the field of information technology' },
+        { label: 'OSN', value: '4th Place Winner of the Indonesian Science Olympiad in Informatics (Regency Level)' },
         { label: 'LKS', value: 'Participant' },
         { label: 'Festika Jatim', value: 'Participant' },
         { label: 'CTF', value: 'Participant' },

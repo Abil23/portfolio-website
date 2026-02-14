@@ -30,15 +30,13 @@ const HeroSection = () => {
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* Right Column (IMAGE) - Ditaruh di atas secara kode agar bisa pakai order */}
+          {/* Right Column (IMAGE) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            /* PERUBAHAN: order-first di mobile, lg:order-last di desktop */
             className="relative order-first lg:order-last"
           >
-            {/* Mengurangi translate-y di mobile agar tidak menabrak Navbar */}
             <div className="relative z-10 -translate-y-10 lg:-translate-y-32">
               <motion.img
                 src="https://i.ibb.co.com/0V6Ck7HJ/IMG-20260211-161641-332-removebg-preview-1-1-removebg-preview.png"
@@ -56,7 +54,6 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            /* PERUBAHAN: order-last di mobile agar turun ke bawah gambar */
             className="text-center lg:text-left order-last lg:order-first"
           >
             <motion.h1
@@ -98,13 +95,22 @@ const HeroSection = () => {
               >
                 See Projects
               </Button>
-              <Button
-                variant="outline"
-                className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-8 py-6 text-base"
+              
+              {/* TOMBOL DOWNLOAD CV DIPERBAIKI */}
+              <a 
+                href="/CV-Moch-Irsyad-Sabilil-Hamdy.pdf" 
+                download="CV-Moch-Irsyad-Sabilil-Hamdy.pdf"
+                className="inline-block" // Agar link berperilaku seperti blok/tombol
               >
-                <Download className="mr-2 h-4 w-4" />
-                Download CV
-              </Button>
+                <Button
+                  variant="outline"
+                  className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-8 py-6 text-base w-full sm:w-auto"
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Download CV
+                </Button>
+              </a>
+
             </motion.div>
 
             {/* Social Icons */}
