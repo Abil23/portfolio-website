@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Instagram, Mail, Download } from 'lucide-react';
+import { Github, Linkedin, Instagram, Mail, Download, ArrowRight } from 'lucide-react'; // Tambahkan ArrowRight
 import { Button } from '../components/ui/button';
 import WelcomeMessage from '../components/WelcomeMessage';
 
@@ -83,35 +83,43 @@ const HeroSection = () => {
               I build accessible, pixel-perfect, and performant web experiences. Currently exploring the intersection of design and server-side logic.
             </motion.p>
 
+            {/* --- MODERN BUTTONS START --- */}
             <motion.div
-              className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
+              {/* Button: See Projects */}
               <Button
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white px-8 py-6 text-base"
+                className="group relative w-full sm:w-auto overflow-hidden rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-8 py-6 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/25 active:scale-95"
               >
-                See Projects
+                <span className="relative z-10 flex items-center justify-center gap-2 text-base font-semibold">
+                  See Projects
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+                {/* Shine Effect Overlay */}
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
               </Button>
               
-              {/* TOMBOL DOWNLOAD CV DIPERBAIKI */}
+              {/* Button: Download CV */}
               <a 
                 href="/CV-Moch-Irsyad-Sabilil-Hamdy.pdf" 
                 download="CV-Moch-Irsyad-Sabilil-Hamdy.pdf"
-                className="inline-block" // Agar link berperilaku seperti blok/tombol
+                className="w-full sm:w-auto"
               >
                 <Button
-                  variant="outline"
-                  className="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-8 py-6 text-base w-full sm:w-auto"
+                  className="group w-full rounded-xl border border-cyan-500/50 bg-transparent px-8 py-6 text-cyan-400 transition-all duration-300 hover:bg-cyan-500 hover:text-white hover:border-cyan-500 hover:shadow-lg active:scale-95"
                 >
-                  <Download className="mr-2 h-4 w-4" />
-                  Download CV
+                  <span className="flex items-center justify-center gap-2 text-base font-semibold">
+                    <Download className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-1" />
+                    Download CV
+                  </span>
                 </Button>
               </a>
-
             </motion.div>
+            {/* --- MODERN BUTTONS END --- */}
 
             {/* Social Icons */}
             <motion.div
@@ -129,7 +137,7 @@ const HeroSection = () => {
                   className={`relative group text-white/70 transition-colors duration-300 ${social.hoverColor}`}
                 >
                   <social.icon size={28} />
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 bg-gray-800 text-white text-xs px-2 py-1 rounded-md border border-white/10">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 bg-gray-800 text-white text-xs px-2 py-1 rounded-md border border-white/10 pointer-events-none whitespace-nowrap">
                     {social.label}
                   </span>
                 </a>
