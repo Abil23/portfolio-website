@@ -39,7 +39,7 @@ const HeroSection = () => {
           >
             <div className="relative z-10 -translate-y-10 lg:-translate-y-32">
               <motion.img
-                src="https://i.ibb.co.com/0V6Ck7HJ/IMG-20260211-161641-332-removebg-preview-1-1-removebg-preview.png"
+                src="/images/foto-profil.webp"
                 alt="Irsyad - Web Developer Portrait"
                 className="w-full max-w-[280px] sm:max-w-md mx-auto"
                 whileHover={{ scale: 1.05 }}
