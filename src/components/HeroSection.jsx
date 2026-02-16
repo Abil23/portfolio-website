@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Instagram, Mail, Download, ArrowRight } from 'lucide-react'; // Tambahkan ArrowRight
+import { Github, Linkedin, Instagram, Mail, Download, ArrowRight, Code2, GraduationCap } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import WelcomeMessage from '../components/WelcomeMessage';
 
@@ -12,10 +12,62 @@ const HeroSection = () => {
     { icon: Mail, href: 'mailto:contact@itsabil.my.id', label: 'Email', hoverColor: 'hover:text-red-500' },
   ];
 
+  // --- LOGIKA TYPEWRITER ---
+  const [text1, setText1] = useState('');
+  const [text2, setText2] = useState('');
+  
+  const fullText1 = "Hi, I'm ";
+  const fullText2 = "Irsyad.";
+
+  useEffect(() => {
+    let isMounted = true;
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const loopTyping = async () => {
+      await wait(2000); 
+
+      while (isMounted) {
+        // Typing
+        for (let i = 0; i <= fullText1.length; i++) {
+          if (!isMounted) return;
+          setText1(fullText1.slice(0, i));
+          await wait(100);
+        }
+        await wait(300);
+        for (let i = 0; i <= fullText2.length; i++) {
+          if (!isMounted) return;
+          setText2(fullText2.slice(0, i));
+          await wait(150);
+        }
+
+        // Pause
+        await wait(3000);
+
+        // Deleting
+        for (let i = fullText2.length; i >= 0; i--) {
+          if (!isMounted) return;
+          setText2(fullText2.slice(0, i));
+          await wait(50);
+        }
+        for (let i = fullText1.length; i >= 0; i--) {
+          if (!isMounted) return;
+          setText1(fullText1.slice(0, i));
+          await wait(50);
+        }
+        await wait(1000);
+      }
+    };
+
+    loopTyping();
+    return () => { isMounted = false; };
+  }, []);
+  // ------------------------------------------
+
   return (
+    // PERBAIKAN 1: Gunakan 'pt-32' (jarak aman dari navbar)
     <section id="home" className="min-h-screen flex items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       
-      {/* Animated Gradient Blobs */}
+      {/* Background Blobs */}
       <motion.div
         className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full blur-3xl opacity-20"
         animate={{ x: [0, 50, 0], y: [0, -50, 0] }}
@@ -27,7 +79,11 @@ const HeroSection = () => {
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       />
 
-      <div className="max-w-7xl mx-auto w-full relative z-10">
+      {/* PERBAIKAN 2: Container Utama 
+         Menggunakan '-mt-6 lg:-mt-10'.
+         Ini hanya menaikkan sedikit visual center, tidak se-ekstrem sebelumnya.
+      */}
+      <div className="max-w-7xl mx-auto w-full relative z-10 -mt-6 lg:-mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
           {/* Right Column (IMAGE) */}
@@ -37,7 +93,8 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative order-first lg:order-last"
           >
-            <div className="relative z-10 -translate-y-10 lg:-translate-y-32">
+            {/* Image Container Adjustment */}
+            <div className="relative z-10">
               <motion.img
                 src="/images/foto-profil.webp"
                 alt="Irsyad - Web Developer Portrait"
@@ -46,6 +103,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.3 }}
               />
             </div>
+            {/* Glow effect */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-purple-500 rounded-full blur-2xl opacity-30"></div>
           </motion.div>
 
@@ -56,17 +114,46 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
             className="text-center lg:text-left order-last lg:order-first"
           >
+            {/* TYPEWRITER TITLE */}
             <motion.h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 h-20 sm:h-24 lg:h-20 flex items-center justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Irsyad</span>
+              <div className="flex flex-wrap items-center">
+                <span className="mr-3">{text1}</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+                  {text2}
+                </span>
+                <motion.span
+                  className="inline-block w-[3px] h-8 sm:h-10 lg:h-12 bg-cyan-400 ml-1"
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                />
+              </div>
             </motion.h1>
 
+            {/* MODERN BADGES (Identity) */}
+            <motion.div
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
+                <Code2 className="w-4 h-4 text-cyan-400" />
+                <span className="text-sm font-medium text-cyan-200">Web Developer</span>
+              </div>
+
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 backdrop-blur-sm">
+                <GraduationCap className="w-4 h-4 text-purple-400" />
+                <span className="text-sm font-medium text-purple-200">Student</span>
+              </div>
+            </motion.div>
+
             <motion.p
-              className="text-xl sm:text-2xl text-gray-300 mb-4"
+              className="text-xl sm:text-2xl text-gray-300 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -83,14 +170,13 @@ const HeroSection = () => {
               I build accessible, pixel-perfect, and performant web experiences. Currently exploring the intersection of design and server-side logic.
             </motion.p>
 
-            {/* --- MODERN BUTTONS START --- */}
+            {/* Buttons */}
             <motion.div
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              {/* Button: See Projects */}
               <Button
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                 className="group relative w-full sm:w-auto overflow-hidden rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-8 py-6 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/25 active:scale-95"
@@ -99,11 +185,9 @@ const HeroSection = () => {
                   See Projects
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
-                {/* Shine Effect Overlay */}
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
               </Button>
               
-              {/* Button: Download CV */}
               <a 
                 href="/CV-Moch-Irsyad-Sabilil-Hamdy.pdf" 
                 download="CV-Moch-Irsyad-Sabilil-Hamdy.pdf"
@@ -119,7 +203,6 @@ const HeroSection = () => {
                 </Button>
               </a>
             </motion.div>
-            {/* --- MODERN BUTTONS END --- */}
 
             {/* Social Icons */}
             <motion.div
