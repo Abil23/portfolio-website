@@ -26,7 +26,8 @@ const InputField = ({ id, label, value, onChange, type = "text", icon: Icon, isT
             ? 'border-cyan-500' 
             : 'border-white/10 hover:border-white/20'
           }`}
-        placeholder=" " 
+        placeholder=" "
+        autocomplete="name"
       />
     ) : (
       <input
@@ -44,6 +45,7 @@ const InputField = ({ id, label, value, onChange, type = "text", icon: Icon, isT
             : 'border-white/10 hover:border-white/20'
           }`}
         placeholder=" "
+        autocomplete="email"
       />
     )}
     
@@ -181,7 +183,6 @@ const ContactSection = () => {
                 onChange={handleChange}
                 focusedField={focusedField}
                 setFocusedField={setFocusedField}
-                autocomplete="name"
               />
               <InputField 
                 id="email" 
@@ -192,7 +193,6 @@ const ContactSection = () => {
                 onChange={handleChange}
                 focusedField={focusedField}
                 setFocusedField={setFocusedField}
-                autocomplete="email"
               />
               <InputField 
                 id="message" 
