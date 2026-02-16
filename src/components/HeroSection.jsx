@@ -9,7 +9,8 @@ const HeroSection = () => {
     { icon: Github, href: 'https://github.com/Abil23', label: 'GitHub', hoverColor: 'hover:text-gray-400' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/moch-irsyad/', label: 'LinkedIn', hoverColor: 'hover:text-blue-500' },
     { icon: Instagram, href: 'https://www.instagram.com/ab1lx1_', label: 'Instagram', hoverColor: 'hover:text-pink-500' },
-    { icon: Mail, href: 'mailto:contact@itsabil.my.id', label: 'Email', hoverColor: 'hover:text-red-500' },
+    // PERBAIKAN 1: Ubah href mailto menjadi ID section '#contact'
+    { icon: Mail, href: '#contact', label: 'Contact', hoverColor: 'hover:text-red-500' },
   ];
 
   // --- LOGIKA TYPEWRITER ---
@@ -63,8 +64,18 @@ const HeroSection = () => {
   }, []);
   // ------------------------------------------
 
+  // Helper untuk scroll halus (Smooth Scroll)
+  const handleScrollTo = (e, href) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
-    // PERBAIKAN 1: Gunakan 'pt-32' (jarak aman dari navbar)
     <section id="home" className="min-h-screen flex items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       
       {/* Background Blobs */}
@@ -79,10 +90,6 @@ const HeroSection = () => {
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* PERBAIKAN 2: Container Utama 
-         Menggunakan '-mt-6 lg:-mt-10'.
-         Ini hanya menaikkan sedikit visual center, tidak se-ekstrem sebelumnya.
-      */}
       <div className="max-w-7xl mx-auto w-full relative z-10 -mt-6 lg:-mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
@@ -93,7 +100,6 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative order-first lg:order-last"
           >
-            {/* Image Container Adjustment */}
             <div className="relative z-10">
               <motion.img
                 src="/images/foto-profil.webp"
@@ -103,7 +109,6 @@ const HeroSection = () => {
                 transition={{ duration: 0.3 }}
               />
             </div>
-            {/* Glow effect */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-purple-500 rounded-full blur-2xl opacity-30"></div>
           </motion.div>
 
@@ -134,7 +139,7 @@ const HeroSection = () => {
               </div>
             </motion.h1>
 
-            {/* MODERN BADGES (Identity) */}
+            {/* BADGES */}
             <motion.div
               className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8"
               initial={{ opacity: 0, y: 20 }}
@@ -204,27 +209,34 @@ const HeroSection = () => {
               </a>
             </motion.div>
 
-            {/* Social Icons */}
+            {/* Social Icons - PERBAIKAN LOGIKA LOOP */}
             <motion.div
               className="flex justify-center lg:justify-start gap-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
             >
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`relative group text-white/70 transition-colors duration-300 ${social.hoverColor}`}
-                >
-                  <social.icon size={28} />
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 bg-gray-800 text-white text-xs px-2 py-1 rounded-md border border-white/10 pointer-events-none whitespace-nowrap">
-                    {social.label}
-                  </span>
-                </a>
-              ))}
+              {socialLinks.map((social, index) => {
+                // Cek apakah link ini internal (diawali #)
+                const isInternal = social.href.startsWith('#');
+                
+                return (
+                  <a
+                    key={index}
+                    href={social.href}
+                    // Jika internal, jangan pakai target="_blank", jika eksternal pakai.
+                    target={isInternal ? undefined : "_blank"}
+                    rel={isInternal ? undefined : "noopener noreferrer"}
+                    onClick={(e) => handleScrollTo(e, social.href)} // Tambahkan handler klik
+                    className={`relative group text-white/70 transition-colors duration-300 ${social.hoverColor}`}
+                  >
+                    <social.icon size={28} />
+                    <span className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 bg-gray-800 text-white text-xs px-2 py-1 rounded-md border border-white/10 pointer-events-none whitespace-nowrap">
+                      {social.label}
+                    </span>
+                  </a>
+                );
+              })}
             </motion.div>
           </motion.div>
 

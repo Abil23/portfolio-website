@@ -4,7 +4,7 @@ import { Mail, Send, MapPin, User, Loader2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useToast } from '../components/ui/use-toast'; 
 
-// InputField tetap di LUAR untuk menjaga kelancaran animasi label
+// InputField tetap di LUAR
 const InputField = ({ id, label, value, onChange, type = "text", icon: Icon, isTextArea = false, focusedField, setFocusedField }) => (
   <div className="relative group mt-2">
     <div className={`absolute left-4 top-4 text-gray-400 transition-colors duration-300 ${focusedField === id ? 'text-cyan-400' : ''}`}>
@@ -82,7 +82,6 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Mengirim data ke Formspree menggunakan ID kamu
       const response = await fetch("https://formspree.io/f/maqdergo", {
         method: "POST",
         headers: {
@@ -93,7 +92,6 @@ const ContactSection = () => {
       });
 
       if (response.ok) {
-        // Menggunakan varian 'success' yang baru kita buat di toast.jsx
         toast({
           variant: "success",
           title: "Message Sent! 🚀",
@@ -101,7 +99,6 @@ const ContactSection = () => {
         });
         setFormData({ name: '', email: '', message: '' });
       } else {
-        // Menggunakan varian 'destructive' untuk error
         toast({
           variant: "destructive",
           title: "Oops!",
@@ -146,20 +143,18 @@ const ContactSection = () => {
             </div>
 
             <div className="flex flex-col gap-6 items-center lg:items-start">
+              {/* Email Block - PERBAIKAN: Background dihapus, Icon diperbesar */}
               <div className="flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition-colors duration-300 bg-white/5 p-4 rounded-xl border border-white/10 w-full lg:w-auto">
-                <div className="p-3 bg-cyan-500/20 rounded-lg">
-                  <Mail className="text-cyan-400" size={24} />
-                </div>
+                <Mail className="text-cyan-400" size={32} />
                 <div className="text-left">
                   <p className="text-sm text-gray-500">Email Me</p>
                   <a href="mailto:contact@itsabil.my.id" className="font-medium text-lg">contact@itsabil.my.id</a>
                 </div>
               </div>
 
+              {/* Location Block - PERBAIKAN: Background dihapus, Icon diperbesar */}
               <div className="flex items-center gap-4 text-gray-300 bg-white/5 p-4 rounded-xl border border-white/10 w-full lg:w-auto">
-                <div className="p-3 bg-purple-500/20 rounded-lg">
-                  <MapPin className="text-purple-400" size={24} />
-                </div>
+                <MapPin className="text-purple-400" size={32} />
                 <div className="text-left">
                   <p className="text-sm text-gray-500">Location</p>
                   <p className="font-medium text-lg">Malang, Indonesia</p>
