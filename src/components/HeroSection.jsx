@@ -103,8 +103,8 @@ const HeroSection = () => {
             <div className="relative z-10">
               <motion.img
                 src="/images/foto-profil.webp"
-                alt="Irsyad - Web Developer Portrait"
-                className="w-full max-w-[280px] sm:max-w-md mx-auto"
+                alt="Irsyad"
+                className="w-full max-w-[280px] sm:max-w-md mx-auto loading=eager fetchpriority=high width=447 height=558"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               />
