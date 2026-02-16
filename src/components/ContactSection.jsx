@@ -181,6 +181,7 @@ const ContactSection = () => {
                 onChange={handleChange}
                 focusedField={focusedField}
                 setFocusedField={setFocusedField}
+                autocomplete="name"
               />
               <InputField 
                 id="email" 
@@ -191,6 +192,7 @@ const ContactSection = () => {
                 onChange={handleChange}
                 focusedField={focusedField}
                 setFocusedField={setFocusedField}
+                autocomplete="email"
               />
               <InputField 
                 id="message" 

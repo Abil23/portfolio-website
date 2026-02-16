@@ -7,7 +7,7 @@ const EducationSection = () => {
   const educationData = [
     {
       school: 'SMAN 1 TUREN',
-      period: '2023 - Present',
+      period: '2024 - Present',
       grade: 'Grade 11 (Science/Informatics Focus)',
       activities: [
         'Active in Digital Skills Program',
