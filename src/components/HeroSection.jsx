@@ -25,7 +25,7 @@ const HeroSection = () => {
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     const loopTyping = async () => {
-      await wait(2000); 
+      await wait(3000); 
 
       while (isMounted) {
         // Typing
@@ -104,7 +104,11 @@ const HeroSection = () => {
               <motion.img
                 src="/images/foto-profil.webp"
                 alt="Irsyad"
-                className="w-full max-w-[280px] sm:max-w-md mx-auto loading=eager fetchpriority=high width=447 height=558"
+                width="447"
+                height="558"
+                loading="eager"
+                fetchPriority="high"
+                className="w-full max-w-[280px] sm:max-w-md mx-auto"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               />
