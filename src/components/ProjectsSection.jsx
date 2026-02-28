@@ -30,7 +30,16 @@ const projects = [
     description: 'A personal portfolio website designed with a modern interface, smooth animations using Framer Motion, and high performance. ',
     techStack: ['React', 'TailwindCSS', 'Framer Motion'],
     liveDemo: 'https://www.itsabil.my.id/',
-    sourceCode: 'https://github.com/Abil23/portfolio-website',
+    sourceCode: '',
+  },
+  {
+    title: 'Fibil Laundry',
+    category: 'Fullstack Web App',
+    image: '/images/Fibil-Laundry.webp',
+    description: 'a laundry website with an admin and member dashboard system. The admin dashboard allows for managing transactions, while the member dashboard provides features for tracking laundry status and history.',
+    techStack: ['React', 'Vite', 'TailwindCSS', 'Supabase'],
+    liveDemo: 'https://www.fibillaundry.my.id/',
+    sourceCode: '',
   },
 ];
 
@@ -57,24 +66,31 @@ const ProjectCard = ({ project, index }) => {
         
         {/* Floating Action Button (muncul saat hover) */}
         <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]">
-          <a
-            href={project.liveDemo}
-            target="_blank"
-            rel="noreferrer"
-            className="p-3 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform duration-200"
-            title="View Live Site"
-          >
-            <ExternalLink size={20} />
-          </a>
-          <a
-            href={project.sourceCode}
-            target="_blank"
-            rel="noreferrer"
-            className="p-3 bg-slate-800 text-white rounded-full hover:scale-110 transition-transform duration-200 border border-white/20"
-            title="View Source Code"
-          >
-            <Github size={20} />
-          </a>
+          {/* Cek apakah liveDemo ada */}
+          {project.liveDemo && (
+            <a
+              href={project.liveDemo}
+              target="_blank"
+              rel="noreferrer"
+              className="p-3 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform duration-200"
+              title="View Live Site"
+            >
+              <ExternalLink size={20} />
+            </a>
+          )}
+          
+          {/* Cek apakah sourceCode ada */}
+          {project.sourceCode && (
+            <a
+              href={project.sourceCode}
+              target="_blank"
+              rel="noreferrer"
+              className="p-3 bg-slate-800 text-white rounded-full hover:scale-110 transition-transform duration-200 border border-white/20"
+              title="View Source Code"
+            >
+              <Github size={20} />
+            </a>
+          )}
         </div>
       </div>
 
@@ -89,9 +105,12 @@ const ProjectCard = ({ project, index }) => {
             <h3 className="text-xl font-bold text-white leading-tight group-hover:text-cyan-300 transition-colors">
               {project.title}
             </h3>
-            <a href={project.liveDemo} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors">
-              <ArrowUpRight size={20} />
-            </a>
+            {/* Cek apakah liveDemo ada untuk icon panah */}
+            {project.liveDemo && (
+              <a href={project.liveDemo} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors">
+                <ArrowUpRight size={20} />
+              </a>
+            )}
           </div>
         </div>
 
